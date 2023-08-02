@@ -47,25 +47,14 @@ public class NameRepository {
         return true;
     }
 
-    private static String[][] toLookupTable() {
-        String[][] table = new String[names.length][names.length * 2];
-
-        for (int i = 0; i < names.length; i++) {
-            String fullName = names[i];
-            table[i] = fullName.split(" ");
-        }
-
-        return table;
-    }
-
     public static String[] findByFirstName(final String firstName) {
-        String[][] lookupTable = toLookupTable();
         String[] result = new String[0];
 
-        for (String[] nameSplit : lookupTable) {
+        for (String name : names) {
+            String[] nameSplit = name.split(" ");
             if (nameSplit[0].equals(firstName)) {
                 // first name matches, append
-                result = addToArray(result, nameSplit[0] + " " + nameSplit[1]);
+                result = addToArray(result, name);
             }
         }
 
@@ -73,13 +62,13 @@ public class NameRepository {
     }
 
     public static String[] findByLastName(final String lastName) {
-        String[][] lookupTable = toLookupTable();
         String[] result = new String[0];
 
-        for (String[] nameSplit : lookupTable) {
-            if (nameSplit[1].equals(lastName)) {
+        for (String name : names) {
+            String[] nameSplit = name.split(" ");
+            if (nameSplit[nameSplit.length - 1].equals(lastName)) {
                 // last name matches, append
-                result = addToArray(result, nameSplit[0] + " " + nameSplit[1]);
+                result = addToArray(result, name);
             }
         }
 

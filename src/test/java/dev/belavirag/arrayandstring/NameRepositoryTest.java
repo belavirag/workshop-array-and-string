@@ -57,8 +57,14 @@ class NameRepositoryTest {
         NameRepository.add("Bela Virag");
         NameRepository.add("Test Virag");
         NameRepository.add("Tester Virag");
+        NameRepository.add("Bela Testing Virag");
 
-        assertArrayEquals(NameRepository.findByLastName("Virag"), new String[]{"Bela Virag", "Test Virag", "Tester Virag"});
+        assertArrayEquals(NameRepository.findByLastName("Virag"), new String[]{
+                "Bela Virag",
+                "Test Virag",
+                "Tester Virag",
+                "Bela Testing Virag"
+        });
         NameRepository.clear();
     }
 
