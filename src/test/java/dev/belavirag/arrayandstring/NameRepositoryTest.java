@@ -84,5 +84,6 @@ class NameRepositoryTest {
                 "Bela Tester",
                 "Tester Virag"
         });
+        NameRepository.clear();
     }
 }
