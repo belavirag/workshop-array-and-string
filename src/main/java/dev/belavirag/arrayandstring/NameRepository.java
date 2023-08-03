@@ -18,7 +18,7 @@ public class NameRepository {
     }
 
     public static String[] findAll() {
-        return names;
+        return Arrays.copyOf(names, names.length);
     }
 
     public static String find(final String fullName) {

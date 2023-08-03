@@ -1,58 +1,68 @@
 package dev.belavirag.arrayandstring;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class NameRepositoryTest {
-
-    @org.junit.jupiter.api.Test
-    void getSize() {
+    @BeforeEach
+    public void setup(){
         NameRepository.clear();
+    }
+
+    @Test
+    void getSize() {
         assertEquals(NameRepository.getSize(), 0);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setNames() {
         final String[] names = new String[]{"Bela Virag"};
 
         NameRepository.setNames(names);
         assertArrayEquals(NameRepository.findAll(), names);
-        NameRepository.clear();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void clear() {
-        NameRepository.clear();
         assertEquals(NameRepository.getSize(), 0);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
+    void findAll() {
+        final String[] names = new String[]{"Bela Virag"};
+        NameRepository.setNames(names);
+
+        assertArrayEquals(NameRepository.findAll(), names);
+    }
+
+    @Test
     void add() {
         assertEquals(NameRepository.getSize(), 0);
         NameRepository.add("Bela Virag");
         assertFalse(NameRepository.add("Bela Virag")); // already exists
         assertEquals(NameRepository.getSize(), 1);
-        NameRepository.clear();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void find() {
         NameRepository.add("Bela Virag");
 
         assertEquals(NameRepository.find("Bela Virag"), "Bela Virag");
         assertNull(NameRepository.find("kjdslfslkfsdlkj sdfljdslfkj"));
-        NameRepository.clear();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void findByFirstName() {
         NameRepository.add("Bela Virag");
         NameRepository.add("Bela Testing");
 
         assertArrayEquals(NameRepository.findByFirstName("Bela"), new String[]{"Bela Virag", "Bela Testing"});
-        NameRepository.clear();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void findByLastName() {
         NameRepository.add("Bela Virag");
         NameRepository.add("Test Virag");
@@ -65,10 +75,9 @@ class NameRepositoryTest {
                 "Tester Virag",
                 "Bela Testing Virag"
         });
-        NameRepository.clear();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void remove() {
         NameRepository.add("Bela Virag");
         NameRepository.remove("Bela Virag");
@@ -76,7 +85,7 @@ class NameRepositoryTest {
         assertEquals(NameRepository.getSize(), 0);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void update() {
         NameRepository.add("Bela Virag");
         NameRepository.add("Tester Virag");
@@ -90,6 +99,5 @@ class NameRepositoryTest {
                 "Bela Tester",
                 "Tester Virag"
         });
-        NameRepository.clear();
     }
 }
